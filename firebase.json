@@ -1,0 +1,31 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "sih-learning-platform",
+          "appId": "1:475073115193:android:53dd3ea803c01d76acc9e8",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "sih-learning-platform",
+          "configurations": {
+            "android": "1:475073115193:android:53dd3ea803c01d76acc9e8",
+            "ios": "1:475073115193:ios:9e9f83cb42f4929facc9e8",
+            "macos": "1:475073115193:ios:9e9f83cb42f4929facc9e8",
+            "web": "1:475073115193:web:316c90d8fad65b12acc9e8",
+            "windows": "1:475073115193:web:1b546c2229e64fbeacc9e8"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "database": "(default)",
+    "location": "asia-south1",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

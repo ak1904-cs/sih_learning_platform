@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Students collection
+    match /students/{studentId} {
+      allow read, write: if request.auth != null && request.auth.uid == studentId;
+    }
+
+    // Teachers collection
+    match /teachers/{teacherId} {
+      allow read, write: if request.auth != null && request.auth.uid == teacherId;
+    }
+
+    // Lessons collection (teachers can create/update, students can read)
+    match /lessons/{lessonId} {
+      allow read: if request.auth != null;
+      allow create, update, delete: if request.auth != null && exists(/databases/$(database)/documents/teachers/$(request.auth.uid));
+    }
+
+    // Quizzes collection (teachers create, students read & update only their attempt)
+    match /quizzes/{quizId} {
+      allow read: if request.auth != null;
+      allow create, update, delete: if request.auth != null && exists(/databases/$(database)/documents/teachers/$(request.auth.uid));
+    }
+
+    // Quiz Attempts (each student only sees/modifies their own attempt)
+    match /quiz_attempts/{attemptId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.studentId;
+    }
+  }
+}
